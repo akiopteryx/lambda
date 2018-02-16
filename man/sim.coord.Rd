@@ -16,13 +16,13 @@ Number of specimens.
   \item{n.landmark}{
 Number of landmarks.
 }
-  \item{var} {
+  \item{var}{
   Single variance applied to each landmark (default=1.0).
 }
-  \item{cov} {
+  \item{cov}{
   Single covariance applied to each pair of landmarks (default=0.5).
 }
-  \item{dim} {
+  \item{dim}{
   Number of spatial dimensions (e.g., 2 for 2-D data, 3 for 3-D data)
 }
 }
