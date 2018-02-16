@@ -44,5 +44,5 @@ sim.3d.data <- sim.coord(n.obj=10, n.landmark=20, var=1, cov=0.5, dim=3)
 sim.3d.data
 }
 
-\keyword{data}% use one of  RShowDoc("KEYWORDS")
-\keyword{simulation}% __ONLY ONE__ keyword per line
+\keyword{data}
+\keyword{simulation}
