@@ -21,15 +21,15 @@ Number of subsampling rounds.
 }
 }
 \details{
-The function reads in landmark data without any missing data and generates two sampling curves. "LaSEC_PSSCurve_Shape.pdf" displays how sampling additional landmarks converges to the distribution of shape variation in the parent dataset. "LaSEC_PSSCurve_CS.pdf" displays how sampling additional landmarks converges to the distribution of centroid size variation in the parent dataset. These sampling curves allows the user to determine whether landmark sampling is adequate to capture the shape and size variation of specimens by looking at the extent of the plateau in the curve and constricting fit (1-PSS) values.
+The function reads in landmark data without any missing data and generates two sampling curves. "LaSEC_SamplingCurve_Shape.pdf" displays how sampling additional landmarks converges to the distribution of shape variation in the parent dataset. "LaSEC_SamplingCurve_CS.pdf" displays how sampling additional landmarks converges to the distribution of centroid size variation in the parent dataset. These sampling curves allows the user to determine whether landmark sampling is adequate to capture the shape and size variation of specimens by looking at the extent of the plateau in the curve and constricting fit (1-PSS) values.
 }
 \value{
 Function returns the following:
-\item{pss}{A matrix of 1–PSS values where each row comprises sequence of fit values at each subsampling of landmarks with respect to shape variation
+\item{fit}{A matrix of 1–PSS values where each row comprises sequence of fit values at each subsampling of landmarks with respect to shape variation
 }
-\item{median.pss}{A vector comprising median 1–PSS values at each subsampling of landmarks
+\item{median.fit}{A vector comprising median 1–PSS values at each subsampling of landmarks
 }
-\item{pss.cs}{A matrix of 1–PSS values where each row comprises sequence of fit values at each subsampling of landmarks with respect to centroid size variation
+\item{fit.cs}{A matrix of 1–PSS values where each row comprises sequence of fit values at each subsampling of landmarks with respect to centroid size variation
 }
 }
 \references{
