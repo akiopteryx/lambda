@@ -1,10 +1,5 @@
 ### LASEC: LANDMARK SAMPLING EVALUATION CURVE ###
 
-### AKI WATANABE ###
-### DIVISION OF PALEONTOLOGY ###
-### AMERICAN MUSEUM OF NATURAL HISTORY ###
-### awatanabe@amnh.org ###
-
 # The function requires "geomorph" and "vegan" packages.
 # To use LaSEC, run this entire script, then use function "lasec" with appropriate parameters: e.g., > lasec(coord.data=example.txt, n.dim=3, iter=1000)
 
@@ -73,39 +68,38 @@ for(i in 1:iter) {
 }
 
 matrix.chosen <- matrix(matrix.chosen, nrow=iter, byrow=T)
-matrix.pss <- 1-matrix(matrix.pss, nrow=iter, byrow=T)
-median.pss <- apply(matrix.pss, 2, median)
-matrix.pss.cs <- 1-matrix(matrix.pss.cs, nrow=iter, byrow=T)
-median.pss.cs <- apply(matrix.pss.cs, 2, median)
+matrix.fit <- 1-matrix(matrix.pss, nrow=iter, byrow=T)
+median.fit <- apply(matrix.pss, 2, median)
+matrix.fit.cs <- 1-matrix(matrix.pss.cs, nrow=iter, byrow=T)
+median.fit.cs <- apply(matrix.pss.cs, 2, median)
 
 # PLOT PROC SS CURVE #
-pdf("LaSEC_PSSCurve_Shape.pdf")
-plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Procrustes SS")
+pdf("LaSEC_SamplingCurve_Shape.pdf")
+plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Fit")
 for(i in 1:iter) {  
 	par(new=T)
-	plot(matrix.pss[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)   # 1-pss to match AWTY
+	plot(matrix.fit[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
-plot(median.pss, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)   # 1-median to match AWTY
+plot(median.fit, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
 dev.off()
 
 # PLOT PROC SS CENTROID SIZE CURVE #
-
-pdf("LaSEC_PSSCurve_CS.pdf")
-plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Procrustes SS")
+pdf("LaSEC_SamplingCurve_CS.pdf")
+plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Fit")
 for(i in 1:iter) {  
 	par(new=T)
-	plot(matrix.pss.cs[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)   # 1-pss to match AWTY
+	plot(matrix.fit.cs[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
-plot(median.pss.cs, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)   # 1-median to match AWTY
+plot(median.fit.cs, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
 dev.off()
 
 # OUTPUT #
-output$pss <- matrix.pss
-output$median.pss <- median.pss
-output$maxpss.landmark <- table(lm.maxpss)   # Remember that max PSS = low fit
-output$minpss.landmark <- table(lm.minpss)   # Remember that min PSS = good fit
-output$pss.cs <- median.pss.cs
+output$fit <- matrix.fit
+output$median.fit <- median.fit
+output$maxpss.landmark <- table(lm.maxpss)
+output$minpss.landmark <- table(lm.minpss)
+output$pss.cs <- median.fit.cs
 return(output)		
 }
