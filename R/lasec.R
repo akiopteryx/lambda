@@ -78,7 +78,7 @@ pdf("LaSEC_SamplingCurve_Shape.pdf")
 plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Fit")
 for(i in 1:iter) {  
 	par(new=T)
-	plot(matrix.fit[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
+	plot(matrix.pss[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
 plot(median.fit, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
@@ -89,7 +89,7 @@ pdf("LaSEC_SamplingCurve_CS.pdf")
 plot(x=NA, xlim=c(0, n.lm), ylim=c(0,1), xlab="No. landmarks", ylab="Fit")
 for(i in 1:iter) {  
 	par(new=T)
-	plot(matrix.fit.cs[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
+	plot(matrix.pss.cs[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
 plot(median.fit.cs, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
