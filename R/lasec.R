@@ -81,7 +81,7 @@ for(i in 1:iter) {
 	plot(matrix.pss[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
-plot(median.fit, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
+plot(median.pss, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
 dev.off()
 
 # PLOT PROC SS CENTROID SIZE CURVE #
@@ -92,7 +92,7 @@ for(i in 1:iter) {
 	plot(matrix.pss.cs[i,], xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="grey", xlab="", ylab="", axes=F)
 }
 par(new=T)
-plot(median.fit.cs, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
+plot(median.pss.cs, xlim=c(0, n.lm), ylim=c(0, 1), type="l", col="black", lwd=3, xlab="", ylab="", axes=F)
 dev.off()
 
 # OUTPUT #
