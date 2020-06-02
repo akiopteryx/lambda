@@ -10,5 +10,5 @@ Assess the fidelity of landmark-based geometric morphometric data.
 Akinobu Watanabe
 }
 \references{
-Watanabe, A. How many landmarks are enough to characterize shape and size variation? ### UPDATE WHEN PUBLISHED ##
+Watanabe, A. 2018. How many landmarks are enough to characterize shape and size variation? PLoS ONE 13(6): e0198341. https://doi.org/10.1371/journal.pone.0198341
 }
