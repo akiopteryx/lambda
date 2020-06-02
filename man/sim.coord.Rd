@@ -33,7 +33,7 @@ The function simulates 2-D or 3-D coordinate data by sampling values based on a 
 The function returns a matrix of simulated coordinate values where rows and columns represent specimens and shape variables, respectively.
 }
 \references{
-Watanabe, A. How many landmarks are enough to characterize shape and size variation? ### UPDATE WHEN PUBLISHED ##
+Watanabe, A. 2018. How many landmarks are enough to characterize shape and size variation? PLoS ONE 13(6): e0198341. https://doi.org/10.1371/journal.pone.0198341
 }
 \author{
 Akinobu Watanabe
