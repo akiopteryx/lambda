@@ -7,7 +7,7 @@ Landmark Sampling Evaluation Curve
 Generate a sampling curve to assess whether sufficient number of landmarks has been sampled.
 }
 \usage{
-lasec(coord.data, n.dim, iter = 1000, show.progress = T)
+lasec(coord.data, n.dim, iter = 1000, show.progress = T, keep=NULL)
 }
 \arguments{
   \item{coord.data}{
@@ -18,6 +18,9 @@ Number of spatial dimensions (i.e., 2 or 3 for 2-D or 3-D).
 }
   \item{iter}{
 Number of subsampling rounds.
+}
+  \item{keep}{
+List of landmarks to keep in data during subsampling.
 }
 }
 \details{
@@ -48,8 +51,13 @@ Akinobu Watanabe
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+# Produces landmark sampling curves automatically:
 data(crocskull)
 lasec(coord.data=crocskull, n.dim=3, iter=10)
+# Plot landmark sampling curves manually:
+data(crocskull)
+lasec.results <- lasec(coord.data=crocskull, n.dim=3, iter=10)
+plot.lasec(lasec.results)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
