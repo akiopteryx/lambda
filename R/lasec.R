@@ -3,11 +3,12 @@
 # The function requires "geomorph" and "vegan" packages.
 # To use LaSEC, run this entire script, then use function "lasec" with appropriate parameters: e.g., > lasec(coord.data=example.txt, n.dim=3, iter=1000)
 
-lasec <- function(coord.data, n.dim, iter=1000, show.progress=T) {
+lasec <- function(coord.data, n.dim, iter=1000, show.progress=T, keep=NULL) {
 
-# coord.data is a n x p matrix with n=specimens, p=shape variables (could be unaligned).
-# n.dim is spatial dimensionality of coord.data (i.e., 2 or 3 for 2-D, 3-D)
-# show.progress is for displaying the nth iteration on console.
+# @coord.data is a n x p matrix with n=specimens, p=shape variables (could be unaligned).
+# @n.dim is spatial dimensionality of coord.data (i.e., 2 or 3 for 2-D, 3-D)
+# @show.progress is for displaying the percent progress completed on console.
+# @keep is a an optional argument for listing landmarks to keep in every subsampling.
 
 	# LIBRARY #
 	require(geomorph)
@@ -37,9 +38,10 @@ for(i in 1:iter) {
   if(show.progress==T) {
     setTxtProgressBar(pb, i)
     }
-  new.lm.order <- sample(n.lm, replace=F)   # new sequence of landmarks
+  new.lm.order <- sample(list.lm[ !list.lm %in% keep], replace=F)   # new sequence of landmarks
 	list.pss <- NULL
 	list.pss.cs <- NULL
+if(is.null(keep) == TRUE) {
 	for(j in 3:n.lm) {
 		subsample.lm <- new.lm.order[1:j]
 		if(n.dim==3) {
@@ -66,7 +68,34 @@ for(i in 1:iter) {
 	matrix.pss <- append(matrix.pss, c(NA, NA, list.pss))
 	matrix.pss.cs <- append(matrix.pss.cs, c(NA, NA, list.pss.cs))	
 }
-
+if(is.null(keep) == FALSE) {
+  for(j in 1:length(new.lm.order)) {
+    subsample.lm <- c(keep, new.lm.order[1:j])
+    if(n.dim==3) {
+      chosen.nvar <- sort(c(3*subsample.lm-2, 3*subsample.lm-1, 3*subsample.lm))
+    }
+    if(n.dim==2) {
+      chosen.nvar <- sort(c(2*subsample.lm-1, 2*subsample.lm))
+    }
+    sampled.coord <- coord.data[,chosen.nvar]
+    sampled.coord <- arrayspecs(sampled.coord, (length(keep)+j), n.dim)
+    sampled.gpa <- gpagen(sampled.coord, print.progress=FALSE)
+    sampled.cs <- sampled.gpa$Csize
+    sampled.shape <- two.d.array(sampled.gpa$coords)
+    
+    # CALCULATE 'FIT' BETWEEN FULL & SUBSAMPLED DATA #
+    pss <- protest(shape.data, sampled.shape, permutations=0)$ss
+    pss.cs <- protest(cs.data, sampled.cs, permutations=0)$ss
+    
+    # RECORD 'FIT' BETWEEN FULL & SUBSAMPLED DATA #
+    list.pss <- append(list.pss, pss)
+    list.pss.cs <- append(list.pss.cs, pss.cs)
+  }
+  matrix.chosen <- append(matrix.chosen, new.lm.order)
+  matrix.pss <- append(matrix.pss, c(rep(NA, length(keep)), list.pss))
+  matrix.pss.cs <- append(matrix.pss.cs, c(rep(NA, length(keep)), list.pss.cs))
+}
+}
 matrix.chosen <- matrix(matrix.chosen, nrow=iter, byrow=T)
 matrix.pss <- 1-matrix(matrix.pss, nrow=iter, byrow=T)
 median.pss <- apply(matrix.pss, 2, median)
