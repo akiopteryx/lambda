@@ -1,7 +1,7 @@
 Package: LaMBDA
 Type: Package
 Title: LandMark-Based Data Assessment
-Version: 0.1.0.9000
+Version: 0.1.1.0000
 Date: 2017-04-12
 Author: Akinobu Watanabe
 Maintainer: Akinobu Watanabe <akinopteryx@gmail.com>
